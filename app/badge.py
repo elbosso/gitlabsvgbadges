@@ -8,7 +8,7 @@ import os
 @app.route("/openIssues/<int:projid>")
 def openIssues(projid):
     lbl=request.args.get('lbl', 'open issues')
-    url = 'http://'+os.environ['GITLAB_HOST']+':'os.environ['GITLAB_PORT']'+'/api/v4/projects/'+str(projid)+'/issues?state=opened&scope=all&per_page=1'
+    url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/'+str(projid)+'/issues?state=opened&scope=all&per_page=1'
     headers = {'Private-Token': os.environ['GITLAB_SECRET']}
     r = requests.get(url, headers=headers)
 #    print (r.headers)
@@ -32,7 +32,7 @@ def openIssues(projid):
 @app.route("/closedIssues/<int:projid>")
 def closedIssues(projid):
     lbl=request.args.get('lbl', 'closed Issues')
-    url = 'http://'+os.environ['GITLAB_HOST']+':'os.environ['GITLAB_PORT']'+'/api/v4/projects/'+str(projid)+'/issues?state=closed&scope=all&per_page=1'
+    url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/'+str(projid)+'/issues?state=closed&scope=all&per_page=1'
     headers = {'Private-Token': os.environ['GITLAB_SECRET']}
     r = requests.get(url, headers=headers)
     if r.status_code!=200 :
@@ -57,7 +57,7 @@ def newIssues(projid):
         start_date = datetime.date.today() + datetime.timedelta(-(int(days) * 7))
         dateParam = start_date.strftime('%Y-%m-%d')
         lbl = lbl + ' last ' + days + ' weeks'
-        url = 'http://'+os.environ['GITLAB_HOST']+':'os.environ['GITLAB_PORT']'+'/api/v4/projects/' + str(projid) + '/issues?scope=all&created_after='+dateParam+'&per_page=1'
+        url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/' + str(projid) + '/issues?scope=all&created_after='+dateParam+'&per_page=1'
         headers = {'Private-Token': os.environ['GITLAB_SECRET']}
         r = requests.get(url, headers=headers)
         if r.status_code != 200:
@@ -86,7 +86,7 @@ def modifiedIssues(projid):
         start_date = datetime.date.today() + datetime.timedelta(-(int(days) * 7))
         dateParam = start_date.strftime('%Y-%m-%d')
         lbl = lbl + ' last ' + days + ' weeks'
-        url = 'http://'+os.environ['GITLAB_HOST']+':'os.environ['GITLAB_PORT']'+'/api/v4/projects/' + str(projid) + '/issues?scope=all&updated_after='+dateParam+'&per_page=1'
+        url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/' + str(projid) + '/issues?scope=all&updated_after='+dateParam+'&per_page=1'
         headers = {'Private-Token': os.environ['GITLAB_SECRET']}
         r = requests.get(url, headers=headers)
         if r.status_code != 200:
@@ -115,7 +115,7 @@ def orphanedIssues(projid):
         start_date = datetime.date.today() + datetime.timedelta(-(int(days) * 7))
         dateParam = start_date.strftime('%Y-%m-%d')
         lbl = lbl + ' last ' + days + ' weeks'
-        url = 'http://'+os.environ['GITLAB_HOST']+':'os.environ['GITLAB_PORT']'+'/api/v4/projects/' + str(projid) + '/issues?state=opened&scope=all&updated_before='+dateParam+'&per_page=1'
+        url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/' + str(projid) + '/issues?state=opened&scope=all&updated_before='+dateParam+'&per_page=1'
         headers = {'Private-Token': os.environ['GITLAB_SECRET']}
         r = requests.get(url, headers=headers)
         if r.status_code != 200:
