@@ -1,4 +1,4 @@
 Flask
-PIL
-ImageFont
 matplotlib
+image
+requests

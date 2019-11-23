@@ -10,19 +10,19 @@ FROM debian:latest
 MAINTAINER Jürgen Key
 
 RUN apt-get update && apt-get install -y apache2 \
-    libapache2-mod-wsgi \
+    libapache2-mod-wsgi-py3 \
     build-essential \
-    python \
-    python-dev\
-    python-pip \
-    vim \
+    python3 \
+    python3-dev\
+    python3-pip \
+    joe \
  && apt-get clean \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
 
 # Copy over and install the requirements
 COPY ./app/requirements.txt /var/www/apache-flask/app/requirements.txt
-RUN pip install -r /var/www/apache-flask/app/requirements.txt
+RUN pip3 install -r /var/www/apache-flask/app/requirements.txt
 
 # Copy over the apache configuration file and enable the site
 COPY ./apache-flask.conf /etc/apache2/sites-available/apache-flask.conf
