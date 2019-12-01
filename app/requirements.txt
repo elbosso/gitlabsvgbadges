@@ -2,3 +2,4 @@ Flask
 matplotlib
 image
 requests
+flask-restplus
