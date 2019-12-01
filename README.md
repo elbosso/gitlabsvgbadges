@@ -15,3 +15,22 @@
 [![Github All Releases](https://img.shields.io/github/downloads/elbosso/gitlabsvgbadges/total.svg)](https://github.com/elbosso/gitlabsvgbadges)
 [![Website elbosso.github.io](https://img.shields.io/website-up-down-green-red/https/elbosso.github.io.svg)](https://elbosso.github.io/)
 
+This project generates SVG images as badges for gitlab. It uses the gitlab API - therefore one must give the app the host and port of the gitlab installation and a secret that allows using the api. All operations have one mandatory parameter or argument - the project id. all other arguments are not mandatory and have sensible defaults.
+
+The application is designed to run inside a docker container. The docker-compose file has preparations to integrate with traefik1.x.
+
+The docker container needs an environment file defining
+```
+GITLAB_HOST
+GITLAB_PORT
+GITLAB_SECRET
+```
+The application can provide badges for
+
+* open issues
+* closed issues
+* new issues in a specified time interval
+* modified issues a specified time interval
+* issues not modified for a specified time interval
+
+The exact paths and descriptions for the operations as well as for the parameters can be found in the api - online accessible using the path _/doc_.
