@@ -9,19 +9,10 @@ services:
     env_file:
       - environment.env
     labels:
-      - "traefik.backend=gitlabsvgbadges"
       - "traefik.enable=true"
-      - "traefik.frontend.rule=Host:gitlabsvgbadges.docker.lab"
-      - "traefik.port=80"
+      - "traefik.http.routers.gitlabsvgbadges.rule=Host(`gitlabsvgbadges.docker.lab`)"
+      - "traefik.http.services.gitlabsvgbadges.loadbalancer.server.port=80"
       - "traefik.docker.network=traefik_proxy"
-      - "traefik.frontend.headers.SSLRedirect=false"
-      - "traefik.frontend.headers.STSSeconds=315360000"
-      - "traefik.frontend.headers.browserXSSFilter=true"
-      - "traefik.frontend.headers.contentTypeNosniff=true"
-      - "traefik.frontend.headers.forceSTSHeader=true"
-      - "traefik.frontend.headers.STSIncludeSubdomains=true"
-      - "traefik.frontend.headers.STSPreload=true"
-      - "traefik.frontend.headers.frameDeny=true"
     networks:
       - traefik_proxy
 
