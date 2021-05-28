@@ -36,6 +36,8 @@ COPY ./run.py /var/www/apache-flask/run.py
 COPY ./app /var/www/apache-flask/app/
 COPY ./app/static/index.html /var/www/
 
+VOLUME /var/www/apache-flask/trustedCerts
+
 RUN a2dissite 000-default.conf
 RUN a2ensite apache-flask.conf
 
