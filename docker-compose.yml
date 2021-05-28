@@ -6,6 +6,8 @@ services:
 #        ports:
 #        - "80:80"
     restart: unless-stopped
+    volumes:
+      - ./trustedCerts=/var/www/apache-flask/trustedCerts
     env_file:
       - environment.env
     labels:
