@@ -24,7 +24,13 @@ class OpenIssue(Resource):
         url = 'http://' + os.environ['GITLAB_HOST'] + ':' + os.environ['GITLAB_PORT'] + '/api/v4/projects/' + str(
             projid) + '/issues?state=opened&scope=all&per_page=1'
         headers = {'Private-Token': os.environ['GITLAB_SECRET']}
-        r = requests.get(url, headers=headers)
+        trustedCertPath='./trustedCerts/'+os.environ['GITLAB_HOST']+'.crt'
+        print(trustedCertPath)
+        print(os.path.exists(trustedCertPath))
+        if os.path.exists(trustedCertPath):
+            r = requests.get(url, headers=headers,verify=trustedCertPath)
+        else:
+            r = requests.get(url, headers=headers)
         #    print (r.headers)
         if r.status_code != 200:
             v = r.status_code
@@ -57,7 +63,13 @@ class ClosedIssue(Resource):
         lbl=request.args.get('lbl', 'closed Issues')
         url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/'+str(projid)+'/issues?state=closed&scope=all&per_page=1'
         headers = {'Private-Token': os.environ['GITLAB_SECRET']}
-        r = requests.get(url, headers=headers)
+        trustedCertPath='./trustedCerts/'+os.environ['GITLAB_HOST']+'.crt'
+        print(trustedCertPath)
+        print(os.path.exists(trustedCertPath))
+        if os.path.exists(trustedCertPath):
+            r = requests.get(url, headers=headers,verify=trustedCertPath)
+        else:
+            r = requests.get(url, headers=headers)
         if r.status_code!=200 :
             v=r.status_code
             lbl='HTTP Error'
@@ -91,7 +103,13 @@ class NewIssue(Resource):
             lbl = lbl + ' last ' + days + ' weeks'
             url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/' + str(projid) + '/issues?scope=all&created_after='+dateParam+'&per_page=1'
             headers = {'Private-Token': os.environ['GITLAB_SECRET']}
-            r = requests.get(url, headers=headers)
+            trustedCertPath = './trustedCerts/' + os.environ['GITLAB_HOST'] + '.crt'
+            print(trustedCertPath)
+            print(os.path.exists(trustedCertPath))
+            if os.path.exists(trustedCertPath):
+                r = requests.get(url, headers=headers, verify=trustedCertPath)
+            else:
+                r = requests.get(url, headers=headers)
             if r.status_code != 200:
                 v = r.status_code
                 lbl = 'HTTP Error'
@@ -129,7 +147,13 @@ class ModifiedIssue(Resource):
             lbl = lbl + ' last ' + days + ' weeks'
             url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/' + str(projid) + '/issues?scope=all&updated_after='+dateParam+'&per_page=1'
             headers = {'Private-Token': os.environ['GITLAB_SECRET']}
-            r = requests.get(url, headers=headers)
+            trustedCertPath = './trustedCerts/' + os.environ['GITLAB_HOST'] + '.crt'
+            print(trustedCertPath)
+            print(os.path.exists(trustedCertPath))
+            if os.path.exists(trustedCertPath):
+                r = requests.get(url, headers=headers, verify=trustedCertPath)
+            else:
+                r = requests.get(url, headers=headers)
             if r.status_code != 200:
                 v = r.status_code
                 lbl = 'HTTP Error'
@@ -167,7 +191,13 @@ class OrphanedIssue(Resource):
             lbl = lbl + ' last ' + days + ' weeks'
             url = 'http://'+os.environ['GITLAB_HOST']+':'+os.environ['GITLAB_PORT']+'/api/v4/projects/' + str(projid) + '/issues?state=opened&scope=all&updated_before='+dateParam+'&per_page=1'
             headers = {'Private-Token': os.environ['GITLAB_SECRET']}
-            r = requests.get(url, headers=headers)
+            trustedCertPath = './trustedCerts/' + os.environ['GITLAB_HOST'] + '.crt'
+            print(trustedCertPath)
+            print(os.path.exists(trustedCertPath))
+            if os.path.exists(trustedCertPath):
+                r = requests.get(url, headers=headers, verify=trustedCertPath)
+            else:
+                r = requests.get(url, headers=headers)
             if r.status_code != 200:
                 v = r.status_code
                 lbl = 'HTTP Error'
