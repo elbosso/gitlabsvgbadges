@@ -3,4 +3,4 @@ matplotlib
 image
 requests
 flask-restplus
-Werkzeug==0.16.1
+Werkzeug==2.2.3
